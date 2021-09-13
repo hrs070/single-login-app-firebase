@@ -1,0 +1,161 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+.app {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.header {
+  position: fixed;
+  top: 0;
+  display: flex;
+  width: 100%;
+  height: 60px;
+  background-color: rgb(15, 146, 245);
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  box-shadow: 0 0 15px rgb(165, 165, 165);
+}
+
+.container {
+  display: flex;
+  width: 80%;
+  height: 50vh;
+  background-color: rgb(251, 251, 251);
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 0 15px rgb(184, 184, 184);
+  border-radius: 5px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+}
+
+.confirm-is-main {
+  height: 80%;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.confirm-is-main-para {
+  color: rgb(169, 166, 166);
+  font-size: 2rem;
+}
+.confirm-is-main-buttondiv {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.button {
+  font-size: 1.1rem;
+  width: 100%;
+  height: 35px;
+  border: none;
+  color: #fff;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  cursor: pointer;
+}
+
+.button-reject {
+  background-color: rgb(255, 2, 82);
+}
+.button-reject:hover,
+.button-reject:focus,
+.button-reject:active {
+  background-color: rgb(203, 17, 76);
+}
+
+.button-confirm {
+  background-color: rgb(15, 146, 245);
+}
+.button-confirm:hover,
+.button-confirm:focus,
+.button-confirm:active {
+  background-color: rgb(12, 124, 210);
+}
+
+.main {
+  height: 80%;
+  width: 80%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.googleButton {
+  background-color: rgb(15, 146, 245);
+}
+.googleButton:hover,
+.googleButton:focus,
+.googleButton:active {
+  background-color: rgb(12, 124, 210);
+}
+
+.user {
+  height: 90%;
+  width: 80%;
+}
+.authenticated-user {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+.login-success {
+  color: rgb(15, 146, 245);
+  font-size: 2rem;
+}
+.user-details {
+  width: 100%;
+  height: 40%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.user-name {
+  font-size: 1.5rem;
+  color: rgb(67, 162, 235);
+  word-wrap: break-word;
+}
+.small-text {
+  font-size: 0.8rem;
+  color: rgb(169, 166, 166);
+}
+.confirm-signout-others-msg {
+  color: rgb(169, 166, 166);
+  font-size: 2rem;
+}
+
+@media screen and (max-width: 400px) {
+  .container {
+    height: 70vh;
+  }
+  .confirm-signout-others-msg {
+    font-size: 1.1rem;
+  }
+}
+
+@media screen and (min-width: 900px) {
+  .container {
+    width: 50%;
+  }
+}

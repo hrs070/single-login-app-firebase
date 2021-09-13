@@ -1,17 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import App from './components/App.jsx';
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+import { initializeApp } from "firebase/app";
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+
+const firebaseConfig = {
+    apiKey: "AIzaSyAIdOpeGwznuGnLXWFTsAoyK6B1jE-3RqI",
+    authDomain: "single-login-app-firebase.firebaseapp.com",
+    projectId: "single-login-app-firebase",
+    storageBucket: "single-login-app-firebase.appspot.com",
+    messagingSenderId: "810121660608",
+    appId: "1:810121660608:web:38b2b6599e3c4321380525"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+
+
+ReactDOM.render(<App />, document.getElementById('root'))
