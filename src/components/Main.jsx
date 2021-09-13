@@ -29,12 +29,16 @@ export default function Main() {
 
     }, [])
 
-
-    // const database = onSnapshot(doc(db, `users/${uid}`), (doc) => {
-    //     console.log("current", doc.data());
-    // }, (error) => {
-    //     console.log("db error:", error);
-    // });
+    async function listenChanges(uid) {
+        let currentData = {};
+        const unsub = onSnapshot(doc(db, "users", uid), (doc) => {
+            currentData = doc.data().userAgent;
+            console.log("Current data: ", currentData);
+            if (currentData !== currentUserAgent) {
+                setAuthenticatedUser(false);
+            }
+        });
+    }
 
     function handleSignIn() {
         signInWithPopup(auth, provider)
@@ -57,16 +61,13 @@ export default function Main() {
         const docRef = doc(db, "users", uid);
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
-            console.log("Document data:", docSnap.data());
             fetchedUser = docSnap.data();
-            console.log("fetchedUser", fetchedUser)
         } else {
             console.log("No such document!");
             fetchedUser = undefined;
         }
 
         if (fetchedUser === undefined || fetchedUser.userAgent === "") {
-            console.log("case:1", fetchedUser, name, email)
             setDoc(doc(db, "users", uid), {
                 name: name,
                 email: email,
@@ -78,18 +79,17 @@ export default function Main() {
             setAuthenticatedUser(true);
         }
         else if (fetchedUser.userAgent === currentUserAgent) {
-            console.log("case:2", fetchedUser.userAgent);
             GoogleAuthProvider.credentialFromResult(result);
             setIsLoggedIn(true);
             setAuthenticatedUser(true);
         }
         else if (fetchedUser.userAgent !== currentUserAgent) {
-            console.log("case:3", fetchedUser.userAgent, currentUserAgent);
             setIsLoggedIn(true);
             setAuthenticatedUser(false);
         }
 
         localStorage.setItem("singleLoginWithFirebase", JSON.stringify({ name: name, email: email, uid: uid, result: result }));
+        listenChanges(uid);
         setCopyName(name);
         setCopyEmail(email);
         setCopyUid(uid);
@@ -101,9 +101,7 @@ export default function Main() {
         const docRef = doc(db, "users", copyUid);
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
-            console.log("Document data:", docSnap.data());
             fetchedUser = docSnap.data();
-            console.log("fetchedUser", fetchedUser)
         } else {
             console.log("No such document!");
             fetchedUser = undefined;
@@ -114,7 +112,6 @@ export default function Main() {
             });
         }
         signOut(auth).then(() => {
-            console.log("Sign out");
         })
         localStorage.removeItem("singleLoginWithFirebase");
         setIsLoggedIn(false);
@@ -163,7 +160,10 @@ export default function Main() {
                             <div className="user-details">
                                 <p className="confirm-signout-others-msg">{copyName}, you are logged in somewhere else. Log out and Sign In here instead ?</p>
                             </div>
-                            <button className="button button-reject" onClick={handleLogoutOthers}>Log Out</button>
+                            <div className="btn-div">
+                                <button className="button button-reject" onClick={handleLogoutOthers}>Yes !</button>
+                                <button className="button googleButton" onClick={handleSignIn}  >Sign In with Google</button>
+                            </div>
                         </div>
                     }
                 </div>

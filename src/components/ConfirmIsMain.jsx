@@ -12,7 +12,7 @@ export default function ConfirmIsMain() {
                 This app can only be used in one Tab at a time. Would you like to use the current tab instead ?
             </p>
             <div className="confirm-is-main-buttondiv">
-                <button className="button button-confirm" onClick={handleConfirm}>Yes</button>
+                <button className="button button-confirm" onClick={handleConfirm}>Yes !</button>
             </div>
         </div>
     )
